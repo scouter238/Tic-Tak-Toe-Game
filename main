@@ -1,10 +1,16 @@
 public class tictactoe {
+	public static void main(String[] args) {
 
+		intro();
+	}
 
-
-
-
-
-
-
-public static intro (String [] args) {
+	public static void intro() {
+		System.out.println("    Welcome to Tic-Tac-Toe      ");
+		System.out.println("------------------------------");
+		System.out.println(" ");
+		System.out.println(" Please Choose a Board Size:");
+		System.out.println(" ");
+		System.out.println("1.SMALL | 2. MEDIUM | 3.LARGE");
+	}
+}
+// This is the intro to prompt the user for beginning input

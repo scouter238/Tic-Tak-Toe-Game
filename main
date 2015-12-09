@@ -1,13 +1,49 @@
 import java.util.Scanner;
-public class tictactoe {
+public class JavaProject2 {
+	public static String[][] boardArray = new String[3][3];
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		intro();
+		int line=0;
+		int boardDimensions = scannerInt();
+		boardArray = new String[boardDimensions][boardDimensions];
+		for(int x=0;x<boardDimensions;x++){
+			for(int i=0;i<boardDimensions;i++){
+				boardArray[x][i] = " ";
+			}
+		}
+		board(boardDimensions,line);
 	}
 	public static void intro() {
 		System.out.println("    Welcome to Tic-Tac-Toe      ");
 		System.out.println("------------------------------");
 		System.out.println(" ");
-		System.out.println(" Please Choose a Board Size:");
-		System.out.println(" ");
-		System.out.println("1.SMALL | 2. MEDIUM | 3.LARGE");
+		System.out.print(" Please enter a number for your board size: ");
+	}
+	public static void board(int boardDimensions,int line){
+		noArray(boardDimensions);
+		System.out.println();
+		for(int x=0;x<boardDimensions;x++){
+			System.out.print("|");
+			for(int x1=0;x1<boardDimensions;x1++){
+				System.out.print(boardArray[line][x1]+"|");
+			}
+			System.out.println();
+			line++;
+			noArray(boardDimensions);
+			System.out.println();
+		}
+	}
+	public static void noArray(int boardDimensions){
+		System.out.print("+");
+		for(int x=0;x<boardDimensions;x++){
+			System.out.print("-+");
+		}
+	}
+	public static int scannerInt() {
+		Scanner scn = new Scanner(System.in);
+		int x = scn.nextInt();
+		return x;
 	}
 }
 // This is the intro to prompt the user for beginning input

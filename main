@@ -1,9 +1,6 @@
+import java.util.Scanner;
 public class tictactoe {
-	public static void main(String[] args) {
-
-		intro();
 	}
-
 	public static void intro() {
 		System.out.println("    Welcome to Tic-Tac-Toe      ");
 		System.out.println("------------------------------");

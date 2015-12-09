@@ -46,4 +46,4 @@ public class JavaProject2 {
 		return x;
 	}
 }
-// This is the intro to prompt the user for beginning input
+

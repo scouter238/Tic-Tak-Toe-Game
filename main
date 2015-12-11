@@ -20,30 +20,29 @@ public class JavaProject2 {
 		System.out.println(" ");
 		System.out.print(" Please enter a number for your board size: ");
 	}
-	public static void board(int boardDimensions,int line){
-		noArray(boardDimensions);
+	public static void board(int boardDimensions,int line){//creates board
+		noArray(boardDimensions);//first line in board containing no array values
 		System.out.println();
-		for(int x=0;x<boardDimensions;x++){
+		for(int x=0;x<boardDimensions;x++){//creates lines with array values
 			System.out.print("|");
 			for(int x1=0;x1<boardDimensions;x1++){
 				System.out.print(boardArray[line][x1]+"|");
 			}
 			System.out.println();
 			line++;
-			noArray(boardDimensions);
+			noArray(boardDimensions);//creates lines under that of array lines
 			System.out.println();
 		}
 	}
-	public static void noArray(int boardDimensions){
+	public static void noArray(int boardDimensions){//created the lines on board that don't contain array values
 		System.out.print("+");
 		for(int x=0;x<boardDimensions;x++){
 			System.out.print("-+");
 		}
 	}
-	public static int scannerInt() {
+	public static int scannerInt() {//overall scanner method for inputs
 		Scanner scn = new Scanner(System.in);
 		int x = scn.nextInt();
 		return x;
 	}
 }
-

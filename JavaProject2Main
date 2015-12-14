@@ -1,5 +1,4 @@
 public class JavaProject2Main {
-	public static String[][] boardArray = new String[3][3];//Array for board size
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		JavaProject2 projectObject = new JavaProject2();

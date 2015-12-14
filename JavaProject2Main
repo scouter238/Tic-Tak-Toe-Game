@@ -1,48 +1,10 @@
-import java.util.Scanner;
-public class JavaProject2 {
+public class JavaProject2Main {
 	public static String[][] boardArray = new String[3][3];//Array for board size
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		intro();//intro scene for game
-		int line=0;//used in methods to create board 
-		int boardDimensions = scannerInt();
-		boardArray = new String[boardDimensions][boardDimensions];//sets board size
-		for(int x=0;x<boardDimensions;x++){
-			for(int i=0;i<boardDimensions;i++){
-				boardArray[x][i] = " ";//sets all array values to " "
-			}
-		}
-		board(boardDimensions,line);//created board
-	}
-	public static void intro() {
-		System.out.println("    Welcome to Tic-Tac-Toe      ");
-		System.out.println("------------------------------");
-		System.out.println(" ");
-		System.out.print(" Please enter a number for your board size: ");
-	}
-	public static void board(int boardDimensions,int line){//creates board
-		noArray(boardDimensions);//first line in board containing no array values
-		System.out.println();
-		for(int x=0;x<boardDimensions;x++){//creates lines with array values
-			System.out.print("|");
-			for(int x1=0;x1<boardDimensions;x1++){
-				System.out.print(boardArray[line][x1]+"|");
-			}
-			System.out.println();
-			line++;
-			noArray(boardDimensions);//creates lines under that of array lines
-			System.out.println();
-		}
-	}
-	public static void noArray(int boardDimensions){//created the lines on board that don't contain array values
-		System.out.print("+");
-		for(int x=0;x<boardDimensions;x++){
-			System.out.print("-+");
-		}
-	}
-	public static int scannerInt() {//overall scanner method for inputs
-		Scanner scn = new Scanner(System.in);
-		int x = scn.nextInt();
-		return x;
+		JavaProject2 projectObject = new JavaProject2();
+		projectObject.intro();//intro scene for game
+		int boardDimensions = projectObject.scannerInt();
+		projectObject.board(boardDimensions);
 	}
 }

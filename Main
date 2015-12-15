@@ -1,0 +1,113 @@
+package TikTacToe;
+
+import java.util.Scanner;
+
+/*
+ * 1. teamMemb1: user input for creating a larger than 3 dimension array + print
+ * 2. TeamMemb2: Intro statment
+ * 
+ * 
+ * 
+ * 
+ */
+public class Main
+{
+
+	public static void main(String[] args)
+	{
+
+		int boardSize;
+
+		System.out.println("    Welcome to Tic-Tac-Toe      ");
+		System.out.println("------------------------------");
+		System.out.println(" ");
+
+		Scanner sysReader = new Scanner(System.in);
+
+		while (true)
+		{
+			 int maxBoardSize = Board.MAX_BOARD_SIZE;
+			 int minBoardSize = 1;
+			
+			System.out.print(" Please enter a number for your board size(" + minBoardSize + "-" + maxBoardSize + ")");
+
+			String line = sysReader.nextLine();
+
+			//System.out.println("[" + line + "]");
+
+			Scanner lineReader = new Scanner(line).useDelimiter(", *");
+			boardSize = lineReader.nextInt();
+
+			if (boardSize < minBoardSize || boardSize > maxBoardSize)
+			{
+				System.out.println("invalid boardsize \ntry again");
+
+				continue;
+			}
+			maxBoardSize = boardSize;
+
+			Board board = new Board(boardSize);
+			Status status = Status.NewBoard;
+		
+
+			board.PrintBoard();
+
+			while (board.hasRoom() && status != Status.Winner)
+			{
+				for (int playerNumb = 1; playerNumb <= 2; playerNumb++)
+				{
+					if(status == Status.Winner)
+						break;
+					
+					if (!board.hasRoom())
+					{
+						System.out.println("board is full, game over");
+						break;
+					}
+					
+					while (true)
+					{
+
+						System.out.println("player " + playerNumb + ", your move: (e.g. 1,3) ");
+						line = sysReader.nextLine();
+						//System.out.println("[" + line + "]");
+						Scanner reader1 = new Scanner(line).useDelimiter(", *");
+						int row = reader1.nextInt();
+						int col = reader1.nextInt();
+						if (row > maxBoardSize || col > maxBoardSize || row < minBoardSize || col < minBoardSize)
+						{
+							System.out
+									.println("Your move of " + row + "," + col + " was unaccaptable please try again");
+							board.PrintBoard();
+							continue;
+						}
+						System.out.println(row + " " + col);
+
+						status = board.MakeMove(row, col, playerNumb);
+						if(status == Status.Winner)
+						{
+							board.PrintBoard();
+							System.out.println("Player "+ playerNumb +" wins!");
+							break;
+						}
+						
+						if (status == Status.ValidMove)
+						{
+							board.PrintBoard();
+							break;
+						}
+						
+						System.out.println("Move failure .Error Code " + status + " please try again");
+						board.PrintBoard();
+					}
+
+				}
+			}
+			
+			if (status != Status.Winner && !board.hasRoom())
+				System.out.println("Its a tie!");
+		
+		}
+
+	}
+}

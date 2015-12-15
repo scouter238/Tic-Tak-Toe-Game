@@ -1,0 +1,151 @@
+package TikTacToe;
+
+public class Board
+{
+	final static int MAX_BOARD_SIZE = 10;
+	String[][] grid;
+	int dimension;
+	String colBorder;
+	String rowChar = "|";
+	int piecesLeft;
+
+	public Board(int boardDimensions)
+	{
+		dimension = boardDimensions;
+		if (dimension > MAX_BOARD_SIZE)
+		{
+			dimension = MAX_BOARD_SIZE;
+		}
+		piecesLeft = dimension * dimension;
+		grid = new String[dimension][dimension];
+
+		// sets all Grid values to " "
+		for (int row = 0; row < dimension; row++)
+		{
+			for (int col = 0; col < dimension; col++)
+			{
+				grid[row][col] = " ";
+			}
+		}
+
+		// Initialize the border for columns.
+		colBorder = "+";
+		for (int col = 0; col < dimension; col++)
+		{
+			colBorder += "-+";
+		}
+
+	}
+
+	// prints the board(variable size)
+	public void PrintBoard()
+	{
+		for (int row = 0; row < dimension; row++)
+		{
+			System.out.println(colBorder);
+			System.out.print(rowChar);
+			for (int col = 0; col < dimension; col++)
+			{
+				System.out.print(grid[row][col] + rowChar);
+			}
+			System.out.println();
+		}
+
+		System.out.println(colBorder);
+	}
+
+	// make a move return null if succesfull otherwise return error statments
+	public Status MakeMove(int row, int col, int playerNumb)
+	{
+		String newPiece;
+		String oldPiece;
+		
+		if (piecesLeft == 0)
+		{
+			return Status.BoardFull;
+		}
+		
+		if (row > dimension || col > dimension || row < 1 || col < 1)
+			return Status.OutOfBounds;
+		
+		if (playerNumb == 1)
+		{
+			newPiece = "X";
+		}
+		
+		else if (playerNumb == 2)
+		{
+			newPiece = "O";
+		}
+		
+		else
+			// Should never get here
+			return Status.InternalError;
+		
+		// read the existing piece
+		oldPiece = grid[row - 1][col - 1];
+		// if no open spot return occupied
+		if (!oldPiece.equals(" "))
+			return Status.Occupied;
+
+		// drop new piece into the grid if its not occupied
+		grid[row - 1][col - 1] = newPiece;
+		piecesLeft--;
+		
+		if(hasWon(newPiece))
+			return Status.Winner;
+		else
+			return Status.ValidMove;
+	}
+
+	public boolean hasRoom()
+	{
+		if (piecesLeft > 0)
+			return true;
+		else
+			return false;
+	}
+
+	// brute force look for 3 in a row(scan the whole grid
+	public boolean hasWon(String piece)
+	{
+		for (int row = 0; row < dimension; row++)
+		{
+			for (int col = 0; col < dimension; col++)
+			{
+				// check up and down
+				if (row >= 1 && row < dimension -1 &&
+					grid[row    ][col].equals(piece) && 
+					grid[row + 1][col].equals(piece) &&
+					grid[row - 1][col].equals(piece))
+					return true;
+				
+				// check left and right
+				if (col >= 1 && col < dimension -1 &&
+					grid[row][col    ].equals(piece) &&
+				    grid[row][col + 1].equals(piece) &&
+					grid[row][col - 1].equals(piece))
+					return true;
+				
+				// check diagonal left right
+				if (row >= 1 && row < dimension -1 &&
+					col >= 1 && col < dimension -1 &&
+					grid[row    ][col    ].equals(piece) && 
+					grid[row + 1][col - 1].equals(piece) && 
+					grid[row - 1][col + 1].equals(piece))
+					return true;
+				
+				// check diagonal right left
+				if (row >= 1 && row < dimension -1 &&
+					col >= 1 && col < dimension -1 &&
+					grid[row    ][col    ].equals(piece) && 
+					grid[row - 1][col - 1].equals(piece) && 
+					grid[row + 1][col + 1].equals(piece))
+					return true;
+			}
+			
+		}
+		return false;
+	}
+
+}

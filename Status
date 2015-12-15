@@ -1,0 +1,6 @@
+package TikTacToe;
+
+public enum Status
+{
+	ValidMove, InternalError, Occupied, OutOfBounds, BoardFull,Winner,NewBoard;
+}
